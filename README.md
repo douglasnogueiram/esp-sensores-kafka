@@ -31,3 +31,4 @@ O componente de acionamento utiliza uma API REST do ESP8266 para controlar o Ar 
 O fluxograma abaixo apresenta todo o processo, desde a leitura dos sensores até a lógica de comando do ar condicionado. O algoritmo presente no componente ˜Controlar Temperatura" é baseado no Heat Index (https://www.wpc.ncep.noaa.gov/html/heatindex_equation.shtml), que leva em consideração a umidade relativa na definição da temperatura de conforto.
 
 ![alt text](https://github.com/douglasnogueiram/esp-sensores-kafka/blob/main/Fluxo%20de%20controle.png)
+
