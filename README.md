@@ -3,6 +3,9 @@ Código-fonte para ESP32 LoRa, para leitura de dados de temperarura e umidade e 
 
 ![alt text](https://github.com/douglasnogueiram/esp-sensores-kafka/blob/main/Arquitetura%20controle%20temperatura.png)
 
+
+![alt text](https://github.com/douglasnogueiram/esp-sensores-kafka/blob/main/Execucao.gif)
+
 Para que toda a solução possa ser executada, é necessário ter os seguintes serviços/componentes em execução:
 
 - Kafka (versão da Confluent, com o serviço Kafka REST, pois o ESP32 irá enviar as mensagens via API REST/HTTP)
