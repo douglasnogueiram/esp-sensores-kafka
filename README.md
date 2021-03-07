@@ -32,3 +32,7 @@ O fluxograma abaixo apresenta todo o processo, desde a leitura dos sensores até
 
 ![alt text](https://github.com/douglasnogueiram/esp-sensores-kafka/blob/main/Fluxo%20de%20controle.png)
 
+O componente "controlar-temperatura" aciona a API do ESP8266 e faz o controle do ar condicionado, de forma periódica:
+
+![alt text](https://github.com/douglasnogueiram/esp-sensores-kafka/blob/main/aciona-ar-condicionado.gif)
+
