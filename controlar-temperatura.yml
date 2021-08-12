@@ -1,0 +1,63 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: service-controlar-temperatura
+spec:
+  type: LoadBalancer
+  ports:
+    - name: http
+      port: 28082
+  selector:
+    app: controlar-temperatura-pod
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: controlar-temperatura-pod
+  labels:
+    app: controlar-temperatura-pod
+spec:
+  selector:
+    matchLabels:
+      app: controlar-temperatura-pod
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: controlar-temperatura-pod
+    spec:
+      containers:
+      - image: douglasnogueiram/ms-communication-controlar-temperatura:1.0.0.-SNAPSHOT
+        name: controlar-temperatura-pod
+        command:
+          - "java"
+          - "-Delastic.apm.active=$(ELASTIC_APM_ACTIVE)"
+          - "-Delastic.apm.server_urls=$(ELASTIC_APM_SERVER_URLS)"
+          - "-Delastic.apm.service_name=$(ELASTIC_APM_SERVICE_NAME)"
+          - "-Delastic.apm.secret_token=$(ELASTIC_APM_SECRET_TOKEN)"
+          - "-Delastic.apm.enabled=$(ELASTIC_APM_ENABLED)"
+          - "-Delastic.apm.capture_body=$(ELASTIC_APM_CAPTURE_BODY)"
+          - "-Delastic.apm.capture_body_content_types=$(ELASTIC_APM_CAPTURE_BODY_CONTENT_TYPES)"
+          - "-Delastic.apm.capture_headers=$(ELASTIC_APM_CAPTURE_HEADERS)"
+          - "-jar"
+          - "ms-communication-controlar-temperatura.jar"  
+        env:
+        - name:  LIGAR-AC
+          value: "http://192.168.15.21:8080/ac/liga"
+        - name: DESLIGAR-AC
+          value: "http://192.168.15.21:8080/ac/desliga"
+        - name: SERVER_PORT
+          value: "28082"
+        - name: TEMPERATURA-AC
+          value: "http://192.168.15.21:8080/ac/temp?id="
+        - name: SWING-AC
+          value: "http://192.168.15.21:8080/ac/swing/"
+        - name: MODE-AC 
+          value: "http://192.168.15.21:8080/ac/mode/"
+        - name: FAN-AC
+          value: "http://192.168.15.21:8080/ac/fan/"  
+        ports:
+        - containerPort: 28082
+          name: http
